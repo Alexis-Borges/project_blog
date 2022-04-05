@@ -7,6 +7,16 @@ const roleRoutes = ({ app }) => {
 
     res.send(roles)
   })
+
+  app.get("/roles/:roleId", auth, async (req, res) => {
+    const {
+      params: { roleId },
+    } = req
+
+    const role = await RoleModel.query().findById(roleId)
+    res.send(role)
+  })
 }
+
 
 export default roleRoutes
