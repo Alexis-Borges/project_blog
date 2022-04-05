@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: OCR A Std, monospace, system-ui, sans-serif;
+  }
+}
+
+body {
+  background: linear-gradient(
+    69deg,
+    rgb(57, 45, 209) 0%,
+    rgb(169, 27, 120) 99.79%
+  );
+  
+  color: antiquewhite;
+}
