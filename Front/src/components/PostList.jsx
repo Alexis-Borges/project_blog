@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import api from "./services/api"
+import Link from "next/link"
 
 const PostList = () => {
   const [posts, setPosts] = useState([])
@@ -7,6 +8,9 @@ const PostList = () => {
   useEffect(() => {
     api.get("/posts").then((response) => setPosts(response.data))
   }, [])
+
+  console.log(posts)
+
   return (
     <>
       <section className="w-full mx-auto">
@@ -24,7 +28,9 @@ const PostList = () => {
                 On The {new Date(item.publicationDate).toLocaleDateString()}
               </div>
               {item.author ? (
-                <a className="mb-4 mt-2 cursor-pointer">By {item.author}</a>
+                <Link href={`users/${item.user_id}`}>
+                  <a className="mb-4 mt-2 cursor-pointer">By {item.author}</a>
+                </Link>
               ) : (
                 <div className="mb-4 mt-2 cursor-pointer">By Deleted User</div>
               )}

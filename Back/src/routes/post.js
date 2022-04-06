@@ -50,6 +50,24 @@ const postRoutes = ({ app }) => {
     res.send("post created")
   })
 
+  app.get("/users/:userId/posts", auth, async (req, res) => {
+    const {
+      params: { userId }
+      } = req
+
+    const user = await UserModel.query().findById(userId)
+
+    if (!user) {
+      res.status(404).send({ error: "User dont exist" })
+
+      return
+    }
+
+    const posts = await PostModel.query().where({user_id:userId})
+
+    res.send(posts)
+  })
+
   app.put("/posts/:postId", auth, async (req, res) => {
     const {
       params: { postId },

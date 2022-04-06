@@ -14,8 +14,6 @@ const userId = () => {
     query: { userId },
   } = useRouter()
 
-  console.log(userId)
-
   useEffect(() => {
     if (userId) {
       api.get(`/users/${userId}`).then((response) => setUser(response.data))
@@ -31,17 +29,14 @@ const userId = () => {
   }, [user])
 
   useEffect(() => {
-    if (posts) {
-      api.get(`/posts/${userId}`).then((response) => setPosts(response.data))
-      console.log(user.title)
+    if (userId) {
+      api
+        .get(`/users/${userId}/posts`)
+        .then((response) => setPosts(response.data))
     }
-  }, [posts])
+  }, [userId])
 
-  if (role) {
-    console.log(role.name)
-  }
-
-  if (!user || !role ) {
+  if (!user || !role || !posts) {
     return <div>Loading</div>
   }
 
@@ -61,7 +56,6 @@ const userId = () => {
                 </p>
                 <p className="pt-4 w-2/6 pb-2 p-5 text-4xl  border-b-2 rounded-xl">
                   Role: {role.name}
-                  {user.posts}
                 </p>
               </div>
             </div>
@@ -77,6 +71,15 @@ const userId = () => {
                 </span>
               </button>
             </div>
+          </section>
+          <section>
+            {posts.map((item) => (
+              <>
+                <p>{item.title}</p>
+                <p>{item.content}</p>
+                <p>{new Date(item.publicationDate).toLocaleDateString()}</p>
+              </>
+            ))}
           </section>
         </main>
       </div>
