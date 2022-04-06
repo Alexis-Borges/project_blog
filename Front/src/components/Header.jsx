@@ -12,28 +12,32 @@ const Header = () => {
     id = JSON.parse(session).payload.user.userId
   }
   return (
-    <header className="flex justify-between items-center px-10 mx-auto m-4 p-5 rounded-xl w-3/4 ">
+    <header className="flex justify-between items-center px-10 mx-auto m-7 p-5 rounded-xl w-3/4 ">
       <Link href="/">
-        <a className="font-bold  text-4xl ">BLOGED AH GOT HIM</a>
+        <a className="font-bold text-4xl ">Chill'in'Blog🌴⛱️ </a>
       </Link>
 
       {session ? (
         <div className="flex">
           <Link href={`users/${id}`}>
-            <a className="text-3xl text-black p-8">{pseudo} </a>
+            <a className="text-4xl m-5">{pseudo} </a>
           </Link>
 
           <button onClick={signOut}>
-            <BiExit className="text-6xl text-black hover:bg-red-500 rounded-xl" />
+            <BiExit className="text-6xl rounded-xl bg-gradient-to-r hover:from-red-500 hover:to-violet-500 " />
           </button>
         </div>
       ) : (
         <nav className="text-2xl">
           <Link href="/sign-up">
-            <a className="p-2 hover:bg-blue-300 rounded-xl m-2">Sign-Up</a>
+            <a className="p-2 rounded-xl m-2 bg-gradient-to-r hover:from-violet-500 hover:to-fuchsia-500">
+              Sign-Up
+            </a>
           </Link>
           <Link href="/sign-in">
-            <a className="p-2 hover:bg-blue-300 rounded-xl m-2">Sign-In</a>
+            <a className="p-2 bg-gradient-to-r hover:from-fuchsia-700 hover:to-pink-500 rounded-xl m-2">
+              Sign-In
+            </a>
           </Link>
         </nav>
       )}

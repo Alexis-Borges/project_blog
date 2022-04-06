@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <Head>
-        <title>Project Blog </title>
+        <title>Chill'in'Blog </title>
         <meta name="description" />
         <link rel="icon" href="/mTSLA.ico" />
       </Head>

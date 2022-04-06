@@ -29,7 +29,9 @@ const sign_up = () => {
   return (
     <div>
       <Header />
-      <h1 className="w-3/4 mx-auto p-10 font-bold text-4xl"> Sign Up </h1>
+      <h1 className="w-3/4 mx-auto pl-14 pt-11 mt-10 font-bold text-4xl">
+        Sign Up
+      </h1>
       <Formik
         initialValues={{}}
         onSubmit={handleFormSubmit}
@@ -39,33 +41,36 @@ const sign_up = () => {
           <Form className=" w-3/4 p-10 mx-auto rounded-xl">
             <Field
               type="text"
-              className="w-3/4 border-2 border-gray-300 p-2 m-4 rounded-xl"
+              className="w-3/4 border-2 bg-black border-gray-300 p-2 m-4 rounded-xl"
               name="displayName"
               placeholder="Enter Your Nickmame"
             ></Field>
+            <br />
             {touched.displayName && errors.displayName && (
-              <div className="errorField w-1/8 mb-2 p-4 text-red-500 rounded-xl">
+              <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
                 {errors.displayName}
               </div>
             )}
             <Field
               name="email"
-              className="w-3/4 border-2 border-gray-300 p-2 m-4 rounded-xl"
+              className="w-3/4 border-2 bg-black border-gray-300 p-2 m-4 rounded-xl"
               placeholder="Enter Your Email Address"
             ></Field>
+            <br />
             {touched.email && errors.email && (
-              <div className="errorField w-1/8 mb-2 p-4 text-red-500 rounded-xl">
+              <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
                 {errors.email}
               </div>
             )}
             <Field
               type="password"
               name="password"
-              className=" w-3/4 border-2 border-gray-300 mt-4 m-4 p-2 rounded-xl "
+              className=" w-3/4 border-2 bg-black border-gray-300 mt-4 m-4 p-2 rounded-xl "
               placeholder="Enter Your Password"
             ></Field>
+
             {touched.password && errors.password && (
-              <div className="errorField w-1/8 mb-2 p-4 text-red-500 rounded-xl">
+              <div className="errorField w-1/8 mb-2 ml-5 rounded-xl">
                 {errors.password}
               </div>
             )}
