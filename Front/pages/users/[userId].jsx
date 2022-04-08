@@ -44,7 +44,7 @@ const userId = () => {
     <>
       <div>
         <Header />
-        <main className="w-9/12 mx-auto">
+        <main className="w-9/12  mx-auto">
           <section>
             <div className="flex items-end justify-center mb-10">
               <div className="w-3/4">
@@ -72,12 +72,22 @@ const userId = () => {
               </button>
             </div>
           </section>
-          <section>
+          <section className="w-10/12 mx-auto">
+            <div className="flex items-center justify-center p-5 text-3xl font-bold ">
+              Your Latest Posts
+            </div>
+            <ul className="flex justify-between flex-col px-10 mx-auto p-2 rounded-xl w-3/4"></ul>
             {posts.map((item) => (
               <>
-                <p>{item.title}</p>
-                <p>{item.content}</p>
-                <p>{new Date(item.publicationDate).toLocaleDateString()}</p>
+                <li className="mb-4 break-all list-none p-6 border-4 border-y-black border-x-transparent">
+                  <a className="text-4xl  font-bold hover:text-blue-300 mb-4 mt-2 cursor-pointer">
+                    {item.title}
+                  </a>
+                  <p className="mb-4 mt-2 overflow-visible">{item.content}</p>
+                  <div className="mb-4 mt-2 ">
+                    On The {new Date(item.publicationDate).toLocaleDateString()}
+                  </div>
+                </li>
               </>
             ))}
           </section>

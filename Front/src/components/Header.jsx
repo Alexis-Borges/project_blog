@@ -24,7 +24,7 @@ const Header = () => {
           </Link>
 
           <button onClick={signOut}>
-            <BiExit className="text-6xl rounded-xl bg-gradient-to-r hover:from-red-500 hover:to-violet-500 " />
+            <BiExit className="text-6xl rounded-xl bg-gradient-to-r hover:from-red-600 hover:to-red-400 " />
           </button>
         </div>
       ) : (
