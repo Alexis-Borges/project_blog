@@ -27,6 +27,18 @@ export const AppContextProvider = (props) => {
     initSession(jwt)
   }, [initSession])
 
+  useEffect(() => {
+    if (session === null && Page.private) {
+      router.push(`/sign-in?redirect=${encodeURIComponent(location.pathname)}`)
+    }
+  }, [Page.private, router, session])
+
+  useEffect(() => {
+    if (session !== null && session !== undefined && Page.noSessionOnly) {
+      router.push("/")
+    }
+  }, [Page.noSessionOnly, Page.private, router, session])
+
   const signIn = useCallback(
     async (email, password) => {
       try {

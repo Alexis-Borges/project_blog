@@ -41,7 +41,7 @@ const sign_up = () => {
           <Form className=" w-3/4 p-10 mx-auto rounded-xl">
             <Field
               type="text"
-              className="w-3/4 border-2 bg-black border-gray-300 p-2 m-4 rounded-xl"
+              className="w-3/4 border-2 bg-black text-white border-gray-300 p-2 m-4 rounded-xl"
               name="displayName"
               placeholder="Enter Your Nickmame"
             ></Field>
@@ -53,7 +53,7 @@ const sign_up = () => {
             )}
             <Field
               name="email"
-              className="w-3/4 border-2 bg-black border-gray-300 p-2 m-4 rounded-xl"
+              className="w-3/4 border-2 bg-black text-white border-gray-300 p-2 m-4 rounded-xl"
               placeholder="Enter Your Email Address"
             ></Field>
             <br />
@@ -65,7 +65,7 @@ const sign_up = () => {
             <Field
               type="password"
               name="password"
-              className=" w-3/4 border-2 bg-black border-gray-300 mt-4 m-4 p-2 rounded-xl "
+              className=" w-3/4 border-2 bg-black text-white border-gray-300 mt-4 m-4 p-2 rounded-xl "
               placeholder="Enter Your Password"
             ></Field>
 
@@ -77,7 +77,7 @@ const sign_up = () => {
             <br />
             <button
               type="submit"
-              className="w-1/4 p-2 text-white bg-green-400 hover:bg-green-500 mt-8 rounded-xl m-4 "
+              className="w-1/4 p-2 text-white border-2 hover:bg-green-500 mt-8 rounded-xl m-4 "
             >
               Insciption 🤑
             </button>

@@ -67,7 +67,7 @@ const sign_in = () => {
             </Link>
             <br />
             <button
-              className="w-1/4 p-2 text-white opacity-100 bg-green-400 hover:bg-green-500 mt-8 rounded-xl m-4 "
+              className="w-1/4 p-2 text-white opacity-100 border-2 hover:bg-green-500 mt-8 rounded-xl m-4 "
               type="submit"
             >
               Connexion 🤗
