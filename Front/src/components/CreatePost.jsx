@@ -57,7 +57,7 @@ const CreatePost = () => {
               />
               <p> Content </p>
               <Field
-                as="textArea"
+                as="textarea"
                 className=" w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"
                 label="Content"
                 type="textarea"

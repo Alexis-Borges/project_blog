@@ -5,6 +5,7 @@ import api from "../../src/components/services/api.js"
 import AppContext from "../../src/components/AppContext"
 import CommentsList from "../../src/components/CommentsList.jsx"
 import ModifyPostForm from "../../src/components/ModifyPostForm.jsx"
+import { comment } from "postcss"
 
 const formatDate = (date) => {
   return (date = new Date(date).toLocaleDateString())
@@ -46,16 +47,6 @@ const PostInfo = () => {
     }
   }, [postsId])
 
-  if (apiError) {
-    return (
-      <section>
-        <div className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
-          <FiAlertTriangle className="text-5xl mr-3" /> {apiError}
-        </div>
-      </section>
-    )
-  }
-
   console.log(post)
 
   if (!post) {
@@ -63,24 +54,22 @@ const PostInfo = () => {
   }
 
   return (
-    <section>
+    <section className="w-full mx-auto">
       {!isModified ? (
-        <div className="mb-8 break-all p-10 border-2 border-pink-700 rounded">
-          <p className="text-4xl text-white font-bold">{post.title}</p>
-          <p className="mb-4 mt-1 text-white">
+        <div className="flex justify-between flex-col px-10 mx-auto p-5 w-3/4 mb-4 break-all border-4 border-y-black border-x-transparent">
+          <p className="text-5xl font-bold mb-4 mt-2">{post.title}</p>
+          <p className="mb-4 mt-2 text-black">
             by{" "}
             {post.author ? (
               <Link href={`/users/${encodeURIComponent(post.user_id)}`}>
-                <a className="font-bold underline hover:text-pink-500">
-                  {post.author}
-                </a>
+                <a className="mb-4 mt-2 ">{post.author}</a>
               </Link>
             ) : (
-              <span className="font-bold underline">Deleted user</span>
+              <span className="mb-4 mt-2 ">Deleted user</span>
             )}{" "}
             on <span>{formatDate(post.publicationDate)}</span>
           </p>
-          <p className="text-white text-justify w-full">{post.content}</p>
+          <p className="mb-4 mt-2 text-4xl overflow-visible">{post.content}</p>
         </div>
       ) : (
         <ModifyPostForm postsId={postsId} />
@@ -88,20 +77,24 @@ const PostInfo = () => {
 
       {!isModified ? (
         (post.user_id == sessionId || userRoleId == 3) && userRoleId != 1 ? (
-          <div className="w-max mb-10 mx-auto">
+          <div className="w-max mb-6 mx-auto">
             {post.user_id == sessionId ? (
               <button
-                className="bg-pink-500 text-white mt-2 mr-2 text-lg font-bold border px-4 py-2 rounded hover:bg-pink-300 focus:outline focus:outline-3 focus:outline-pink-300 transition-all hover:scale-105"
+                className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-16 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
                 onClick={() => setIsModified(true)}
               >
-                Modify post
+                <span className="relative px-5 py-2.5 transition-all ease-in duration-700 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Modify Post
+                </span>
               </button>
             ) : null}
             <button
-              className="bg-red-700 text-white mt-2 ml-2 text-lg font-bold border px-4 py-2 rounded  hover:bg-red-400 focus:outline focus:outline-3 focus:outline-red-400 transition-all hover:scale-105"
+              className=" relative mt-8 inline-flex items-center justify-center p-0.5 mb-2 ml-8 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-fuchsia-500 to-purple-500 group-hover:from-fuchsia-500 group-hover:to-purple-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800"
               onClick={deletePost}
             >
-              Delete post
+              <span class=" relative px-5 py-2.5 transition-all ease-in duration-700 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Delete Post
+              </span>
             </button>
           </div>
         ) : null

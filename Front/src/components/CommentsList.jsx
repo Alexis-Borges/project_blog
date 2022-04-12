@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { useContext, useEffect, useState } from "react"
-import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "./AppContext.jsx"
 import api from "../components/services/api.js"
 import CreateCommentForm from "../components/CreateCommentForm.jsx"
@@ -9,19 +8,23 @@ const formatDate = (date) => {
   return (date = new Date(date).toLocaleDateString())
 }
 
-const CommentsList = ({ postId, postUserId }) => {
+const CommentsList = ({ postsId, postUserId }) => {
   const { session } = useContext(AppContext)
-
   const [comments, setComments] = useState(null)
   const [apiError, setApiError] = useState(null)
 
-  const sessionId = JSON.parse(session).payload.user.userId
-  const userRoleId = JSON.parse(session).payload.user.roleId
+  let sessionId = null
+  let userRoleId = null
+
+  if (session) {
+    sessionId = JSON.parse(session).payload.user.userId
+    userRoleId = JSON.parse(session).payload.user.roleId
+  }
 
   useEffect(() => {
-    if (postId) {
+    if (postsId) {
       api
-        .get(`posts/${postId}/comments`)
+        .get(`posts/${postsId}/comments`)
         .then((response) => setComments(response.data))
         .catch((error) =>
           setApiError(
@@ -29,25 +32,12 @@ const CommentsList = ({ postId, postUserId }) => {
           )
         )
     }
-  }, [postId])
-
-  if (apiError) {
-    return (
-      <section className="border border-pink-800 mb-10 rounded">
-        <h3 className="flex items-center justify-center py-5 bg-pink-800 rounded-t text-3xl font-bold">
-          Comments
-        </h3>
-        <div className="w-full py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
-          <FiAlertTriangle className="text-5xl mr-3" /> {apiError}
-        </div>
-      </section>
-    )
-  }
+  }, [postsId])
 
   if (!comments) {
     return (
-      <section className="border border-pink-800 mb-10 pb-10 rounded-b">
-        <h3 className="flex items-center justify-center mb-10 py-5 bg-pink-800 rounded-t text-3xl font-bold">
+      <section className="border-4 border-x-black border-y-transparent mb-10 pb-10 rounded-b">
+        <h3 className="flex items-center justify-center mb-10 py-5 bg-red-800 rounded-t text-3xl font-bold">
           Comments
         </h3>
       </section>
@@ -56,14 +46,14 @@ const CommentsList = ({ postId, postUserId }) => {
 
   if (!comments.length) {
     return (
-      <section className="mb-10">
-        <CreateCommentForm postId={postId} />
-        <div className="shadow border pb-10 rounded">
-          <h3 className="flex items-center justify-center mb-10 py-5 bg-pink-800 rounded-t text-3xl font-bold">
-            Comments
+      <section className="w-full mx-auto">
+        <CreateCommentForm postsId={postsId} />
+        <div className="flex items-center flex-col justify-center py-5 text-2xl font-bold">
+          <h3 className="text-3xl mb-4 break-all p-6 border-4 border-x-black border-y-transparent">
+            The Comment(s) Of The Post
           </h3>
-          <p className="text-center text-white text-2xl">
-            No comments found 😥
+          <p className=" mb-4 break-all p-6 border-4 border-x-black border-y-transparent">
+            Nothing There For The Moment 👨🏻‍🦯
           </p>
         </div>
       </section>
@@ -71,13 +61,13 @@ const CommentsList = ({ postId, postUserId }) => {
   }
 
   return (
-    <section className="mb-10">
-      <CreateCommentForm postId={postId} />
-      <div className="shadow border border-pink-700 break-all rounded">
-        <h3 className="flex items-center justify-center py-5 bg-pink-800 text-white rounded-t text-3xl font-bold">
+    <section className="w-full mx-auto">
+      <CreateCommentForm postsId={postsId} />
+      <div className=" break-all rounded">
+        <h3 className="flex items-center justify-center py-5 text-3xl font-bold">
           Comments
         </h3>
-        <ul className="border border-pink-700 rounded-b">
+        <ul className="flex justify-between flex-col px-10 mx-auto p-5 rounded-xl w-3/4">
           {comments.map((item, index) => (
             <li
               key={item.id}

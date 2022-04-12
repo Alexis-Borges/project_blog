@@ -6,33 +6,33 @@ import api from "./services/api.js"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
   content: Yup.string()
-    .max(500, "Must be at most 500 characters")
+    .max(500, "Max 500 characters")
     .required("Required field"),
 })
 
 const CreateCommentForm = ({ postsId }) => {
   const { router, session } = useContext(AppContext)
-  let sessionId = null
+  let userId = null
 
   if (session) {
-    sessionId = JSON.parse(session).payload.user.userId
+    userId = JSON.parse(session).payload.user.userId
   }
 
   const handleFormSubmit = useCallback(
     async ({ content }) => {
-      await api.post(`/users/${sessionId}/posts/${postsId}/comments`, {
+      await api.post(`/users/${userId}/posts/${postsId}/comments`, {
         content,
       })
       router.reload()
     },
-    [postsId, router, sessionId]
+    [postsId, router, userId]
   )
 
   return (
-    <section className="mb-10 border-2 border-pink-700 rounded shadow">
-      <div className="px-10 pt-6">
-        <h2 className="text-4xl text-white font-bold mb-5">
-          ⬇⬇ Create comment ⬇⬇
+    <section className="w-full mx-auto">
+      <div className="flex items-center justify-center py-5 text-3xl font-bold flex-col px-10 mx-auto p-5 rounded-xl w-3/4 ">
+        <h2 className="flex items-center justify-center text-3xl mb-4 font-bold">
+          ✍️ Create Your Comment
         </h2>
         <Formik
           initialValues={{
@@ -42,20 +42,21 @@ const CreateCommentForm = ({ postsId }) => {
           onSubmit={handleFormSubmit}
         >
           {({ errors, touched }) => (
-            <Form>
+            <Form className="w-full p-6 border-4 border-x-black border-y-transparent">
               <Field
+                className="w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"
+                as="textarea"
                 type="textarea"
                 name="content"
-                placeholder="Content of comment"
+                placeholder="Write Your Comment Here "
                 rows="4"
-                errorType={errors.content}
-                touchedType={touched.content}
+                errortype={errors.content}
               />
               <button
-                className="bg-pink-500 text-white mt-2 mb-6 text-lg font-bold border px-4 py-2 rounded hover:bg-pink-300 focus:outline focus:outline-3 focus:outline-pink-300  transition-all hover:scale-105"
+                className="text-black mt-2 ml-8 text-lg border-2 border-y-black border-x-transparent font-bold px-4 py-2 hover: transition-all hover:scale-125"
                 type="submit"
               >
-                Create comment
+                Post Your Comment 🚀
               </button>
             </Form>
           )}

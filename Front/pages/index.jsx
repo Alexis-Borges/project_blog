@@ -2,6 +2,7 @@ import Head from "next/head"
 import CreatePost from "../src/components/CreatePost"
 import Header from "../src/components/Header"
 import PostList from "../src/components/PostList"
+import CreateCommentForm from "../src/components/CreateCommentForm.jsx"
 
 const Home = () => {
   return (

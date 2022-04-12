@@ -25,12 +25,12 @@ const PostList = () => {
                   {item.title}
                 </a>
               </Link>
-              <p className="mb-4 mt-2 overflow-visible">{item.content}</p>
+              <p className="mb-4 mt-2 text-2xl overflow-visible">{item.content}</p>
               <div className="mb-4 mt-2 ">
                 On The {new Date(item.publicationDate).toLocaleDateString()}
               </div>
               {item.author ? (
-                <Link href={`/users/${encodeURIComponent(item.user_id)}`}>
+                 <Link href={`/users/${encodeURIComponent(item.user_id)}`}>
                   <a className="mb-4 mt-2 cursor-pointer">By {item.author}</a>
                 </Link>
               ) : (

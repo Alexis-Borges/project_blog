@@ -3,6 +3,7 @@ import api from "../../src/components/services/api.js"
 import { useCallback, useContext, useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import AppContext from "../../src/components/AppContext"
+import Link from "next/link"
 
 const userId = () => {
   const { router, session } = useContext(AppContext)
@@ -113,9 +114,11 @@ const userId = () => {
             {posts.map((item) => (
               <>
                 <li className="mb-4 break-all list-none p-6 border-4 border-y-black border-x-transparent">
-                  <a className="text-4xl  font-bold hover:text-blue-300 mb-4 mt-2 cursor-pointer">
-                    {item.title}
-                  </a>
+                  <Link href={`/posts/${encodeURIComponent(item.id)}`} passHref>
+                    <a className="text-4xl  font-bold hover:text-blue-300 mb-4 mt-2 cursor-pointer">
+                      {item.title}
+                    </a>
+                  </Link>
                   <p className="mb-4 mt-2 overflow-visible">{item.content}</p>
                   <div className="mb-4 mt-2 ">
                     On The {new Date(item.publicationDate).toLocaleDateString()}
