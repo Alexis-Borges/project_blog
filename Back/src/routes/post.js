@@ -94,7 +94,7 @@ const postRoutes = ({ app }) => {
 
     if (!post) {
       res.status(404).send({ error: "Post dont exist" })
-
+       
       return
     }
 

@@ -12,6 +12,7 @@ const userId = () => {
 
   let sessionId = null
   let userRoleId = null
+
   if (session) {
     sessionId = JSON.parse(session).payload.user.userId
     userRoleId = JSON.parse(session).payload.user.roleId
@@ -47,6 +48,7 @@ const userId = () => {
         .then((response) => setRole(response.data))
     }
   }, [user])
+  console.log(role)
 
   useEffect(() => {
     if (userId) {
@@ -92,7 +94,6 @@ const userId = () => {
                   </button>
                 ) : /* </Link> */
                 null}
-
                 <button
                   className=" relative inline-flex items-center justify-center p-0.5 mb-2 ml-8 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-fuchsia-500 to-purple-500 group-hover:from-fuchsia-500 group-hover:to-purple-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800"
                   onClick={deleteUser}

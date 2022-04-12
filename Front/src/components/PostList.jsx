@@ -30,7 +30,7 @@ const PostList = () => {
                 On The {new Date(item.publicationDate).toLocaleDateString()}
               </div>
               {item.author ? (
-                <Link href={`users/${item.user_id}`}>
+                <Link href={`/users/${encodeURIComponent(item.user_id)}`}>
                   <a className="mb-4 mt-2 cursor-pointer">By {item.author}</a>
                 </Link>
               ) : (

@@ -19,7 +19,7 @@ const Header = () => {
 
       {session ? (
         <div className="flex">
-          <Link href={`users/${id}`}>
+          <Link href={`/users/${encodeURIComponent(id)}`}>
             <a className="text-4xl m-5">{pseudo} </a>
           </Link>
 
