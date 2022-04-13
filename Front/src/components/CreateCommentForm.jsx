@@ -4,7 +4,7 @@ import * as Yup from "yup"
 import AppContext from "../components/AppContext.jsx"
 import api from "./services/api.js"
 
-const displayingErrorMessagesSchema = Yup.object().shape({
+const displayErrorMes = Yup.object().shape({
   content: Yup.string()
     .max(500, "Max 500 characters")
     .required("Required field"),
@@ -27,6 +27,7 @@ const CreateCommentForm = ({ postsId }) => {
     },
     [postsId, router, userId]
   )
+  console.log(postsId)
 
   return (
     <section className="w-full mx-auto">
@@ -38,10 +39,10 @@ const CreateCommentForm = ({ postsId }) => {
           initialValues={{
             content: "",
           }}
-          validationSchema={displayingErrorMessagesSchema}
+          validationSchema={displayErrorMes}
           onSubmit={handleFormSubmit}
         >
-          {({ errors, touched }) => (
+          {({ errors }) => (
             <Form className="w-full p-6 border-4 border-x-black border-y-transparent">
               <Field
                 className="w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"

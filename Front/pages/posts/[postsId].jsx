@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import PostInfo from "./PostInfo.jsx"
+import PostData from "./PostData.jsx"
 import Header from "../../src/components/Header.jsx"
 
 const PostPage = () => {
@@ -10,7 +10,7 @@ const PostPage = () => {
   return (
     <>
       <Header />
-      <PostInfo postsId={postsId} />
+      <PostData postsId={postsId} />
     </>
   )
 }

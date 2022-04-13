@@ -50,6 +50,8 @@ const sessionRoutes = ({ app }) => {
       return
     }
 
+
+
     const jwt = jsonwebtoken.sign(
       {
         payload: {

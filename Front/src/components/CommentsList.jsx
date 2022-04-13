@@ -63,18 +63,13 @@ const CommentsList = ({ postsId, postUserId }) => {
   return (
     <section className="w-full mx-auto">
       <CreateCommentForm postsId={postsId} />
-      <div className=" break-all rounded">
-        <h3 className="flex items-center justify-center py-5 text-3xl font-bold">
-          Comments
+      <div className=" flex items-center flex-col justify-center py-5 text-2xl font-bold">
+        <h3 className="text-3xl mb-4 break-all p-6">
+          The Comment(s) Of The Post
         </h3>
         <ul className="flex justify-between flex-col px-10 mx-auto p-5 rounded-xl w-3/4">
           {comments.map((item, index) => (
-            <li
-              key={item.id}
-              className={`p-5 text-white ${
-                index % 2 == 0 ? "bg-black" : "bg-white/5"
-              }`}
-            >
+            <li className="text-3xl mb-4 break-all p-6 border-4 border-x-black border-y-transparent">
               <p className="mb-3 font-bold">
                 {item.author ? (
                   <Link href={`/users/${encodeURIComponent(item.user_id)}`}>
@@ -89,7 +84,7 @@ const CommentsList = ({ postsId, postUserId }) => {
               </p>
               <Link href={`/comments/${encodeURIComponent(item.id)}`}>
                 <a>
-                  <p className="text-justify w-full hover:bg-pink-200">
+                  <p className="text-justify w-full hover:bg-blue-200">
                     {item.content}
                   </p>
                 </a>

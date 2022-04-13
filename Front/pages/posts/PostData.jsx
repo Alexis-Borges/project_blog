@@ -5,16 +5,14 @@ import api from "../../src/components/services/api.js"
 import AppContext from "../../src/components/AppContext"
 import CommentsList from "../../src/components/CommentsList.jsx"
 import ModifyPostForm from "../../src/components/ModifyPostForm.jsx"
-import { comment } from "postcss"
 
 const formatDate = (date) => {
   return (date = new Date(date).toLocaleDateString())
 }
 
-const PostInfo = () => {
+const PostData = () => {
   const { session, router } = useContext(AppContext)
   const [post, setPost] = useState(null)
-  const [apiError, setApiError] = useState(null)
   const [isModified, setIsModified] = useState(false)
 
   const {
@@ -36,18 +34,9 @@ const PostInfo = () => {
 
   useEffect(() => {
     if (postsId && !isNaN(postsId)) {
-      api
-        .get(`/posts/${postsId}`)
-        .then((response) => setPost(response.data))
-        .catch((error) =>
-          setApiError(
-            error.response ? error.response.data.error : error.message
-          )
-        )
+      api.get(`/posts/${postsId}`).then((response) => setPost(response.data))
     }
   }, [postsId])
-
-  console.log(post)
 
   if (!post) {
     return <section>Loading</section>
@@ -84,7 +73,7 @@ const PostInfo = () => {
                 onClick={() => setIsModified(true)}
               >
                 <span className="relative px-5 py-2.5 transition-all ease-in duration-700 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                  Modify Post
+                  Modify The Post
                 </span>
               </button>
             ) : null}
@@ -93,7 +82,7 @@ const PostInfo = () => {
               onClick={deletePost}
             >
               <span class=" relative px-5 py-2.5 transition-all ease-in duration-700 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                Delete Post
+                Delete The Post
               </span>
             </button>
           </div>
@@ -101,10 +90,10 @@ const PostInfo = () => {
       ) : (
         <div className="w-max mb-10 mx-auto">
           <button
-            className="bg-red-700 text-white mt-2 mr-2 text-lg font-bold border px-4 py-2 rounded hover:bg-red-400 focus:outline focus:outline-3 focus:outline-red-400 transition-all hover:scale-105"
+            className="text-black mt-2 ml-8 text-lg border-2 border-x-black border-y-transparent font-bold px-4 py-2 hover: transition-all hover:scale-125"
             onClick={() => setIsModified(false)}
           >
-            Undo change
+            Undo The Changes ♻️
           </button>
         </div>
       )}
@@ -114,4 +103,4 @@ const PostInfo = () => {
   )
 }
 
-export default PostInfo
+export default PostData

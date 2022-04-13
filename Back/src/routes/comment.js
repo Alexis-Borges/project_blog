@@ -20,6 +20,22 @@ const commentRoutes = ({ app }) => {
     res.send(comments)
   })
 
+  app.put("/posts/:postId/comments", auth, async (req, res) => {
+    const {
+      params: { postId },
+    } = req
+    const post = await PostModel.query().findById(postId)
+
+    if (!post) {
+      res.status(404).send({ error: "Post Not Found" })
+
+      return
+    }
+
+    const comments = await CommentModel.query().where("post_id", postId)
+    res.send(comments)
+  })
+
   app.get("/comments/:commentId", auth, async (req, res) => {
     const {
       params: { commentId },

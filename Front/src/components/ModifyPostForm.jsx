@@ -4,7 +4,7 @@ import * as Yup from "yup"
 import AppContext from "../components/AppContext.jsx"
 import api from "../components/services/api.js"
 
-const displayingErrorMessagesSchema = Yup.object().shape({
+const displayErrorMes = Yup.object().shape({
   title: Yup.string()
     .max(100, "Must be at most 100 characters")
     .required("Required field"),
@@ -13,68 +13,69 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .required("Required field"),
 })
 
-const ModifyPostForm = ({ postId }) => {
+const ModifyPostForm = ({ postsId }) => {
   const { router } = useContext(AppContext)
   const [post, setPost] = useState(null)
 
   const handleFormSubmit = useCallback(
     async ({ title, content }) => {
-      await api.put(`/posts/${postId}`, { title, content })
+      await api.put(`/posts/${postsId}`, { title, content })
       router.reload()
     },
-    [postId, router]
+    [postsId, router]
   )
 
   useEffect(() => {
-    if (postId && !isNaN(postId)) {
-      api.get(`/posts/${postId}`).then((response) => setPost(response.data))
+    if (postsId && !isNaN(postsId)) {
+      api.get(`/posts/${postsId}`).then((response) => setPost(response.data))
     }
-  }, [postId])
+  }, [postsId])
 
   if (!post) {
     return <a> loading </a>
   }
 
   return (
-    <section className="mb-10 border-2 border-pink-700 rounded shadow">
-      <div className="px-10 pt-6">
-        <h2 className="text-4xl text-pink-700 font-bold mb-5">
-          Modify post 🔨
+    <section className="w-full mx-auto">
+      <div className="flex items-center justify-center py-5 text-3xl font-bold flex-col px-10 mx-auto p-5 rounded-xl w-3/4">
+        <h2 className="flex items-center justify-center text-3xl mb-4 font-bold">
+          ✍️ Modify The Post
         </h2>
         <Formik
           initialValues={{
             title: post.title,
             content: post.content,
           }}
-          validationSchema={displayingErrorMessagesSchema}
+          validationSchema={displayErrorMes}
           onSubmit={handleFormSubmit}
         >
           {({ errors, touched }) => (
-            <Form>
+            <Form className="w-full p-6 border-4 border-x-black border-y-transparent">
               <Field
-                label="Title"
+                className="w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"
                 id="title"
                 name="title"
                 placeholder="Title of post"
-                errorType={errors.title}
-                touchedType={touched.title}
+                errortype={errors.title}
+                touchedtype={touched.title}
               />
               <Field
-                as="textArea"
+                className="w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"
+                as="textarea"
                 label="Content"
                 type="textarea"
                 id="content"
                 name="content"
                 placeholder="Content of post"
-                rows="8"
-                errorType={errors.content}
-                touchedType={touched.content}
+                rows="6"
+                errortype={errors.content}
+                touchedtype={touched.content}
               />
               <button
-                className="bg-pink-500 text-white mt-2 mb-6 text-lg font-bold border px-4 py-2 rounded hover:bg-pink-300 focus:outline focus:outline-3 focus:outline-pink-300  transition-all hover:scale-105"
+                className="text-black mt-2 ml-8 text-lg border-2 border-y-black border-x-transparent font-bold px-4 py-2 hover: transition-all hover:scale-125"
                 type="submit"
               >
-                Modify post
+                Confirm The Modifications 📫
               </button>
             </Form>
           )}
