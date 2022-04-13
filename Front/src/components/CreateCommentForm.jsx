@@ -27,7 +27,6 @@ const CreateCommentForm = ({ postsId }) => {
     },
     [postsId, router, userId]
   )
-  console.log(postsId)
 
   return (
     <section className="w-full mx-auto">

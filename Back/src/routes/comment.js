@@ -19,6 +19,21 @@ const commentRoutes = ({ app }) => {
     const comments = await CommentModel.query().where("post_id", postId)
     res.send(comments)
   })
+  
+  app.post("users/:userId/posts/:postId/comments", auth, async (req, res) => {
+    const {
+      params: { postId, userId },
+      body: { content }
+    } = req
+
+    await CommentModel.query().insert({
+      content,
+      user_id: userId,
+      post_id: postId
+    })
+
+    res.send("commentaire ajouter")
+  })
 
   app.put("/posts/:postId/comments", auth, async (req, res) => {
     const {
@@ -56,15 +71,15 @@ const commentRoutes = ({ app }) => {
       params: { commentId },
       body: { content }
     } = req
-    
+
     const comment = await CommentModel.query().updateAndFetchById(commentId, { content })
-    
+
     if (!comment) {
       res.status(404).send({ error: "Comment dont exist" })
 
       return
     }
-    
+
     res.send("Comment Modified")
   })
 
@@ -72,17 +87,17 @@ const commentRoutes = ({ app }) => {
     const {
       params: { commentId },
     } = req
-  
+
     const comment = await CommentModel.query().findById(commentId)
-  
+
     if (!comment) {
       res.status(404).send({ error: "Comment dont exist" })
-  
+
       return
     }
-  
+
     await CommentModel.query().delete().where({ id: commentId })
-  
+
     res.send("Comment Deleted Succesfully")
   })
 }

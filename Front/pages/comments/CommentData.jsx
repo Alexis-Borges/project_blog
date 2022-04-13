@@ -42,20 +42,20 @@ const CommentData = ({ commentId }) => {
   return (
     <section>
       {!isModified ? (
-        <div className="mb-8 p-10 border-2 border-pink-500 text-white rounded shadow">
-          <p className="mb-3 break-all font-bold">
+        <div className="">
+          <p className="">
             {comment.author ? (
               <Link href={`/users/${encodeURIComponent(comment.user_id)}`}>
-                <a className="font-bold underline hover:text-pink-500">
+                <a className="">
                   {comment.author}
                 </a>
               </Link>
             ) : (
-              <span className="font-bold underline">Deleted user</span>
+              <span className="">Deleted user</span>
             )}{" "}
             commented on <span>{formatDate(comment.publicationDate)}</span>
           </p>
-          <p className="text-justify break-all w-full">{comment.content}</p>
+          <p className="">{comment.content}</p>
         </div>
       ) : (
         <ModifyCommentForm commentId={commentId} />
@@ -65,17 +65,17 @@ const CommentData = ({ commentId }) => {
         comment.user_id == sessionId ||
         comment.postAuthorId == sessionId ||
         userRoleId == 3 ? (
-          <section className="w-max mb-10 mx-auto">
+          <section className="">
             {comment.user_id == sessionId ? (
               <button
-                className="bg-pink-500 text-white mt-2 mr-2 text-lg font-bold border px-4 py-2 rounded hover:bg-pink-300 focus:outline focus:outline-3 focus:outline-pink-300 transition-all hover:scale-105"
+                className=""
                 onClick={() => setIsModified(true)}
               >
                 Modify comment
               </button>
             ) : null}
             <button
-              className="bg-red-700 text-white mt-2 ml-2 text-lg font-bold border px-4 py-2 rounded  hover:bg-red-400 focus:outline focus:outline-3 focus:outline-red-400 transition-all hover:scale-105"
+              className=""
               onClick={deleteComment}
             >
               Delete comment
@@ -83,9 +83,9 @@ const CommentData = ({ commentId }) => {
           </section>
         ) : null
       ) : (
-        <section className="w-max mb-10 mx-auto">
+        <section className="">
           <button
-            className="bg-red-500 text-white mt-2 mr-2 text-lg font-bold border px-4 py-2 rounded hover:bg-red-300 focus:outline focus:outline-3 focus:outline-red-300 transition-all hover:scale-105"
+            className=""
             onClick={() => setIsModified(false)}
           >
             Undo change

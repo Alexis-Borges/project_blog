@@ -7,10 +7,12 @@ const Header = () => {
   const { session, signOut } = useContext(AppContext)
   let pseudo = null
   let id = null
+
   if (session) {
     pseudo = JSON.parse(session).payload.user.displayName
     id = JSON.parse(session).payload.user.userId
   }
+  
   return (
     <header className="flex justify-between items-center px-10 mx-auto m-7 p-5 rounded-xl w-3/4 ">
       <Link href="/">

@@ -18,6 +18,9 @@ const postRoutes = ({ app }) => {
     } = req
     const post = await PostModel.query().findById(postId)
 
+      .select("posts.*", "users.displayName as author")
+      .leftJoinRelated("users")
+
     if (!post) {
       res.status(404).send({ error: "Post Not Found" })
 
@@ -34,6 +37,8 @@ const postRoutes = ({ app }) => {
     } = req
 
     const user = await UserModel.query().findById(userId)
+
+      .orderBy("createdAt", "desc")
 
     if (!user) {
       res.status(404).send({ error: "User dont exist" })
@@ -53,9 +58,11 @@ const postRoutes = ({ app }) => {
   app.get("/users/:userId/posts", auth, async (req, res) => {
     const {
       params: { userId }
-      } = req
+    } = req
 
     const user = await UserModel.query().findById(userId)
+
+      .orderBy("createdAt", "asce")
 
     if (!user) {
       res.status(404).send({ error: "User dont exist" })
@@ -63,7 +70,7 @@ const postRoutes = ({ app }) => {
       return
     }
 
-    const posts = await PostModel.query().where({user_id:userId})
+    const posts = await PostModel.query().where({ user_id: userId })
 
     res.send(posts)
   })
@@ -94,7 +101,7 @@ const postRoutes = ({ app }) => {
 
     if (!post) {
       res.status(404).send({ error: "Post dont exist" })
-       
+
       return
     }
 

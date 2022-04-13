@@ -49,7 +49,6 @@ const userId = () => {
         .then((response) => setRole(response.data))
     }
   }, [user])
-  console.log(role)
 
   useEffect(() => {
     if (userId) {
@@ -58,8 +57,6 @@ const userId = () => {
         .then((response) => setPosts(response.data))
     }
   }, [userId])
-
-  console.log(userId)
 
   if (!user || !role || !posts) {
     return <div>Loading</div>
