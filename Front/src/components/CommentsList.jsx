@@ -68,7 +68,7 @@ const CommentsList = ({ postsId, postUserId }) => {
           The Comment(s) Of The Post
         </h3>
         <ul className="flex justify-between flex-col px-10 mx-auto p-5 rounded-xl w-3/4">
-          {comments.map((item, index) => (
+          {comments.map((item) => (
             <li className="text-3xl mb-4 break-all p-6 border-4 border-x-black border-y-transparent">
               <p className="mb-3 font-bold">
                 {item.author ? (

@@ -10,6 +10,10 @@ const commentRoutes = ({ app }) => {
     } = req
     const post = await PostModel.query().findById(postId)
 
+      .select("posts.*", "users.displayName as author")
+      .leftJoinRelated("users")
+      .orderBy("createdAt", "desc")
+
     if (!post) {
       res.status(404).send({ error: "Post Not Found" })
 
@@ -19,17 +23,17 @@ const commentRoutes = ({ app }) => {
     const comments = await CommentModel.query().where("post_id", postId)
     res.send(comments)
   })
-  
-  app.post("users/:userId/posts/:postId/comments", auth, async (req, res) => {
+
+  app.post("users/:userId/posts/:postsId/comments", auth, async (req, res) => {
     const {
-      params: { postId, userId },
+      params: { postsId, userId },
       body: { content }
     } = req
 
     await CommentModel.query().insert({
       content,
       user_id: userId,
-      post_id: postId
+      post_id: postsId
     })
 
     res.send("commentaire ajouter")

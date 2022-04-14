@@ -2,6 +2,7 @@ import Link from "next/link"
 import { useContext, useEffect, useState } from "react"
 import AppContext from "../../src/components/AppContext"
 import api from "../../src/components/services/api"
+import { useRouter } from "next/router"
 //import ModifyCommentForm from "../../src/components/ModifyPostForm"
 
 const formatDate = (date) => {
@@ -39,6 +40,10 @@ const CommentData = ({ commentId }) => {
     }
   }, [commentId])
 
+  if (!comment) {
+    return <section>Loading</section>
+  }
+
   return (
     <section>
       {!isModified ? (
@@ -46,9 +51,7 @@ const CommentData = ({ commentId }) => {
           <p className="">
             {comment.author ? (
               <Link href={`/users/${encodeURIComponent(comment.user_id)}`}>
-                <a className="">
-                  {comment.author}
-                </a>
+                <a className="">{comment.author}</a>
               </Link>
             ) : (
               <span className="">Deleted user</span>
@@ -67,27 +70,18 @@ const CommentData = ({ commentId }) => {
         userRoleId == 3 ? (
           <section className="">
             {comment.user_id == sessionId ? (
-              <button
-                className=""
-                onClick={() => setIsModified(true)}
-              >
+              <button className="" onClick={() => setIsModified(true)}>
                 Modify comment
               </button>
             ) : null}
-            <button
-              className=""
-              onClick={deleteComment}
-            >
+            <button className="" onClick={deleteComment}>
               Delete comment
             </button>
           </section>
         ) : null
       ) : (
         <section className="">
-          <button
-            className=""
-            onClick={() => setIsModified(false)}
-          >
+          <button className="" onClick={() => setIsModified(false)}>
             Undo change
           </button>
         </section>

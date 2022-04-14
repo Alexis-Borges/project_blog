@@ -39,7 +39,7 @@ const CreatePost = () => {
 
   return (
     <>
-      {userId == id || userRoleId == 3 || userRoleId == 2 ? (
+      {userId == id || userRoleId == 3 || userRoleId == 2 || id == null ? (
         <section className="w-full mx-auto">
           <div className="flex items-center justify-center py-5 text-3xl font-bold flex-col px-10 mx-auto p-5 rounded-xl w-3/4 ">
             <h2 className="flex items-center justify-center text-3xl mb-4 font-bold ">
