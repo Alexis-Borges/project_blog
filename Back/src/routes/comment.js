@@ -24,7 +24,7 @@ const commentRoutes = ({ app }) => {
     res.send(comments)
   })
 
-  app.post("users/:userId/posts/:postsId/comments", auth, async (req, res) => {
+  app.post("/:userId/posts/:postsId/comments", auth, async (req, res) => {
     const {
       params: { postsId, userId },
       body: { content }

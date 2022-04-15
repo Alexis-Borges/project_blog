@@ -23,9 +23,9 @@ const Home = () => {
       </Head>
       <Header />
       {!session ? (
-        <div className="text-white text-3xl text-center pt-8 mb-10">
+        <div className="rainbow text-3xl text-center pt-8 mb-10" >
           Welcome in the chillest Blog ever created 🧊 <br />
-          To start or continue your Experience create an account ou connect yourself
+          To start or continue your Experience create an account or connect yourself
         </div>
       ) : null}
       {userRoleId && userRoleId > 1 ? <CreatePost /> : null}
