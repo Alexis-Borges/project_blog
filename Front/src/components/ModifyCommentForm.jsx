@@ -6,8 +6,8 @@ import api from "../components/services/api.js"
 
 const displayErrorMes = Yup.object().shape({
   content: Yup.string()
-    .max(500, "Must be at most 500 characters")
-    .required("Required field"),
+    .max(500, "Max 500 characters 📌")
+    .required("Field Required 🚨"),
 })
 
 const ModifyCommentForm = ({ commentId }) => {
@@ -60,12 +60,12 @@ const ModifyCommentForm = ({ commentId }) => {
                 name="content"
                 placeholder="Content of post"
                 rows="6"
-                {...(touched.email && errors.email && (
-                  <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
-                    {errors.email}
-                  </div>
-                ))}
               />
+              {touched.content && errors.content && (
+                <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
+                  {touched.content && errors.content}
+                </div>
+              )}
               <button
                 className="text-black mt-2 ml-8 text-lg border-2 border-y-black border-x-transparent font-bold px-4 py-2 hover: transition-all hover:scale-125"
                 type="submit"

@@ -58,9 +58,7 @@ const ModifyAccForm = ({ userId }) => {
         </div>
       ) : null}
       <div className="px-10 py-6">
-        <h2 className="">
-          Modify account
-        </h2>
+        <h2 className="">Modify account</h2>
         <Formik
           initialValues={{
             displayName: user.displayName,
@@ -77,31 +75,37 @@ const ModifyAccForm = ({ userId }) => {
                 id="displayName"
                 name="displayName"
                 placeholder="Username"
-                errorType={errors.displayName}
-                touchedType={touched.displayName}
               />
+              {touched.displayName && errors.displayName && (
+                <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
+                  {touched.displayName && errors.displayName}
+                </div>
+              )}
               <Field
                 label="Password"
                 type="password"
                 id="password"
                 name="password"
                 placeholder="6 characters minimum"
-                errorType={errors.password}
-                touchedType={touched.password}
               />
+              {touched.password && errors.password && (
+                <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
+                  {touched.password && errors.password}
+                </div>
+              )}
               <Field
                 label="Confirm password"
                 type="password"
                 id="passwordConfirm"
                 name="passwordConfirm"
                 placeholder="Same as password "
-                errorType={errors.passwordConfirm}
-                touchedType={touched.passwordConfirm}
               />
-              <button
-                className=""
-                type="submit"
-              >
+              {touched.passwordConfirm && errors.passwordConfirm && (
+                <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
+                  {touched.passwordConfirm && errors.passwordConfirm}
+                </div>
+              )}
+              <button className="" type="submit">
                 Modify account
               </button>
             </Form>

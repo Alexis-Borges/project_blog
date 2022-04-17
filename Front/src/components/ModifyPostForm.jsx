@@ -6,11 +6,11 @@ import api from "../components/services/api.js"
 
 const displayErrorMes = Yup.object().shape({
   title: Yup.string()
-    .max(100, "Must be at most 100 characters")
-    .required("Required field"),
+    .max(100, "Max 100 characters 📌")
+    .required("Field Required 🚨"),
   content: Yup.string()
-    .max(1000, "Must be at most 1000 characters")
-    .required("Required field"),
+    .max(1000, "Max 1000 characters 📌")
+    .required("Field Required 🚨"),
 })
 
 const ModifyPostForm = ({ postsId }) => {
@@ -56,9 +56,12 @@ const ModifyPostForm = ({ postsId }) => {
                 id="title"
                 name="title"
                 placeholder="Title of post"
-                errortype={errors.title}
-                touchedtype={touched.title}
               />
+              {touched.title && errors.title && (
+                <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
+                  {touched.title && errors.title}
+                </div>
+              )}
               <Field
                 className="w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"
                 as="textarea"
@@ -68,9 +71,12 @@ const ModifyPostForm = ({ postsId }) => {
                 name="content"
                 placeholder="Content of post"
                 rows="6"
-                errortype={errors.content}
-                touchedtype={touched.content}
               />
+              {touched.content && errors.content && (
+                <div className="errorField w-1/8 mb-2 ml-5  rounded-xl">
+                  {touched.content && errors.content}
+                </div>
+              )}
               <button
                 className="text-black mt-2 ml-8 text-lg border-2 border-y-black border-x-transparent font-bold px-4 py-2 hover: transition-all hover:scale-125"
                 type="submit"
