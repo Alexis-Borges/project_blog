@@ -11,12 +11,13 @@ const formatDate = (date) => {
 const CommentsList = ({ postsId, postUserId }) => {
   const { session } = useContext(AppContext)
   const [comments, setComments] = useState(null)
-  const [apiError, setApiError] = useState(null)
 
+  let pseudo = null
   let sessionId = null
   let userRoleId = null
 
   if (session) {
+    pseudo = JSON.parse(session).payload.user.displayName
     sessionId = JSON.parse(session).payload.user.userId
     userRoleId = JSON.parse(session).payload.user.roleId
   }
@@ -26,11 +27,6 @@ const CommentsList = ({ postsId, postUserId }) => {
       api
         .get(`posts/${postsId}/comments`)
         .then((response) => setComments(response.data))
-        .catch((error) =>
-          setApiError(
-            error.response ? error.response.data.error : error.message
-          )
-        )
     }
   }, [postsId])
 
@@ -73,12 +69,10 @@ const CommentsList = ({ postsId, postUserId }) => {
               <p className="mb-3 font-bold">
                 {item.author ? (
                   <Link href={`/users/${encodeURIComponent(item.user_id)}`}>
-                    <a className="font-black underline hover:text-pink-500">
-                      {item.author}
-                    </a>
+                    <a className="font-black underline">{item.author}</a>
                   </Link>
                 ) : (
-                  <span className="underline">Deleted user</span>
+                  <span className="underline ">Deleted user</span>
                 )}{" "}
                 commented on <span>{formatDate(item.publicationDate)}</span>
               </p>

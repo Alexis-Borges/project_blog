@@ -5,6 +5,7 @@ import auth from "../middlewares/auth.js"
 const postRoutes = ({ app }) => {
   app.get("/posts", async (req, res) => {
     const posts = await PostModel.query()
+      
       .select("posts.*", "users.displayName as author")
       .leftJoinRelated("users")
       .orderBy("createdAt", "desc")
@@ -61,8 +62,8 @@ const postRoutes = ({ app }) => {
     } = req
 
     const user = await UserModel.query().findById(userId)
-
-      .orderBy("createdAt", "asce")
+  
+      
 
     if (!user) {
       res.status(404).send({ error: "User dont exist" })

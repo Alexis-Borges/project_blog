@@ -4,7 +4,7 @@ import Header from "../../src/components/Header"
 import AppContext from "../../src/components/AppContext"
 import ModifyAccForm from "../../src/components/ModifyAccForm"
 
-const ModifyAccountPage = () => {
+const ModifyAccPage = () => {
   const { router, session } = useContext(AppContext)
 
   let sessionId = null
@@ -25,11 +25,9 @@ const ModifyAccountPage = () => {
   return (
     <>
       <Header />
-      <ModifyAccForm userId={userId} />
+      <ModifyAccForm />
     </>
   )
 }
 
-ModifyAccountPage.private = true
-
-export default ModifyAccountPage
+export default ModifyAccPage

@@ -10,10 +10,6 @@ const commentRoutes = ({ app }) => {
     } = req
     const post = await PostModel.query().findById(postId)
 
-      .select("posts.*", "users.displayName as author")
-      .leftJoinRelated("users")
-      .orderBy("createdAt", "desc")
-
     if (!post) {
       res.status(404).send({ error: "Post Not Found" })
 
@@ -36,6 +32,9 @@ const commentRoutes = ({ app }) => {
       post_id: postsId
     })
 
+      .select("comments.*", "users.displayName as author")
+      .leftJoinRelated("users")
+
     res.send("commentaire ajouter")
   })
 
@@ -45,6 +44,9 @@ const commentRoutes = ({ app }) => {
     } = req
     const post = await PostModel.query().findById(postId)
 
+      .select("comments.*", "users.displayName as author")
+      .leftJoinRelated("users")
+      
     if (!post) {
       res.status(404).send({ error: "Post Not Found" })
 
@@ -61,6 +63,9 @@ const commentRoutes = ({ app }) => {
     } = req
     const comment = await CommentModel.query().findById(commentId)
 
+      .select("comments.*", "users.displayName as author")
+      .leftJoinRelated("users")
+
     if (!comment) {
       res.status(404).send({ error: "Comment Not Found" })
 
@@ -76,7 +81,11 @@ const commentRoutes = ({ app }) => {
       body: { content }
     } = req
 
+
     const comment = await CommentModel.query().updateAndFetchById(commentId, { content })
+
+      .select("comments.*", "users.displayName as author")
+      .leftJoinRelated("users")
 
     if (!comment) {
       res.status(404).send({ error: "Comment dont exist" })
