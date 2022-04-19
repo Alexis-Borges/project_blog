@@ -16,7 +16,8 @@ const commentRoutes = ({ app }) => {
       return
     }
 
-    const comments = await CommentModel.query().where("post_id", postId)
+    const comments = await CommentModel.query().select("comments.*", "users.displayName as author").leftJoinRelated("users").where("post_id", postId).orderBy("createdAt", "desc")
+
     res.send(comments)
   })
 
@@ -46,7 +47,7 @@ const commentRoutes = ({ app }) => {
 
       .select("comments.*", "users.displayName as author")
       .leftJoinRelated("users")
-      
+
     if (!post) {
       res.status(404).send({ error: "Post Not Found" })
 

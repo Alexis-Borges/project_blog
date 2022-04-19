@@ -50,15 +50,17 @@ const ModifyAccForm = ({ userId }) => {
   }
 
   return (
-    <section className="">
+    <section className="w-full mx-auto">
       {apiError ? (
         <div className="">
           Error
           {apiError}
         </div>
       ) : null}
-      <div className="px-10 py-6">
-        <h2 className="">Modify account</h2>
+      <div className="flex items-center justify-center py-5 text-3xl font-bold flex-col px-10 mx-auto p-5 rounded-xl w-3/4">
+        <h2 className="flex items-center justify-center text-3xl mb-4 font-bold">
+          ✍️ Modify account
+        </h2>
         <Formik
           initialValues={{
             displayName: user.displayName,
@@ -69,8 +71,9 @@ const ModifyAccForm = ({ userId }) => {
           onSubmit={handleFormSubmit}
         >
           {({ errors, touched }) => (
-            <Form>
+            <Form className="w-full p-6 border-4 border-x-black border-y-transparent">
               <Field
+                className="w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"
                 label="Username"
                 id="displayName"
                 name="displayName"
@@ -82,6 +85,7 @@ const ModifyAccForm = ({ userId }) => {
                 </div>
               )}
               <Field
+                className="w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"
                 label="Password"
                 type="password"
                 id="password"
@@ -94,6 +98,7 @@ const ModifyAccForm = ({ userId }) => {
                 </div>
               )}
               <Field
+                className="w-full border-2 bg-black text-white border-gray-300 p-2 mb-4 mt-4 rounded-xl"
                 label="Confirm password"
                 type="password"
                 id="passwordConfirm"
@@ -105,7 +110,10 @@ const ModifyAccForm = ({ userId }) => {
                   {touched.passwordConfirm && errors.passwordConfirm}
                 </div>
               )}
-              <button className="" type="submit">
+              <button
+                className="text-black mt-2 ml-8 text-lg border-2 border-y-black border-x-transparent font-bold px-4 py-2 hover: transition-all hover:scale-125"
+                type="submit"
+              >
                 Modify account
               </button>
             </Form>

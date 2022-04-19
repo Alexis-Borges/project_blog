@@ -12,12 +12,10 @@ const CommentsList = ({ postsId, postUserId }) => {
   const { session } = useContext(AppContext)
   const [comments, setComments] = useState(null)
 
-  let pseudo = null
   let sessionId = null
   let userRoleId = null
 
   if (session) {
-    pseudo = JSON.parse(session).payload.user.displayName
     sessionId = JSON.parse(session).payload.user.userId
     userRoleId = JSON.parse(session).payload.user.roleId
   }
@@ -65,11 +63,14 @@ const CommentsList = ({ postsId, postUserId }) => {
         </h3>
         <ul className="flex justify-between flex-col px-10 mx-auto p-5 rounded-xl w-3/4">
           {comments.map((item) => (
-            <li className="text-3xl mb-4 break-all p-6 border-4 border-x-black border-y-transparent">
+            <li
+              key={item.id}
+              className="text-3xl mb-4 break-all p-6 border-4 border-x-black border-y-transparent"
+            >
               <p className="mb-3 font-bold">
                 {item.author ? (
                   <Link href={`/users/${encodeURIComponent(item.user_id)}`}>
-                    <a className="font-black underline">{item.author}</a>
+                    <a className="font-black">{item.author}</a>
                   </Link>
                 ) : (
                   <span className="underline ">Deleted user</span>

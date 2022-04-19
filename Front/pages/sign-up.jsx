@@ -1,6 +1,5 @@
 import Header from "../src/components/Header"
-import { Formik, Field, Form, ResetForm } from "formik"
-import axios from "axios"
+import { Formik, Field, Form } from "formik"
 import * as Yup from "yup"
 import { useCallback, useContext } from "react"
 import AppContext from "../src/components/AppContext"
@@ -17,15 +16,15 @@ const displayErrorMes = Yup.object({
     .min(8, "Your password is too short.🚨"),
 })
 
-const sign_up = () => {
+const Sign_up = () => {
   const { signUp } = useContext(AppContext)
   const handleFormSubmit = useCallback(
     async ({ displayName, email, password }) => {
-      console.log("ok")
       return signUp(displayName, email, password)
     },
     [signUp]
   )
+
   return (
     <div>
       <Header />
@@ -88,4 +87,4 @@ const sign_up = () => {
   )
 }
 
-export default sign_up
+export default Sign_up

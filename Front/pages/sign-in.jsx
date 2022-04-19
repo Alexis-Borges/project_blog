@@ -1,7 +1,6 @@
 import Header from "../src/components/Header"
 import { Formik, Field, Form } from "formik"
 import * as Yup from "yup"
-import axios from "axios"
 import Link from "next/link"
 import { useCallback, useContext } from "react"
 import AppContext from "../src/components/AppContext"
@@ -15,11 +14,10 @@ const displayErrorMes = Yup.object({
     .required("An Email is Required 🚨"),
 })
 
-const sign_in = () => {
+const Sign_in = () => {
   const { signIn } = useContext(AppContext)
   const handleFormSubmit = useCallback(
     async ({ email, password }) => {
-      console.log("ok")
       return signIn(email, password)
     },
     [signIn]
@@ -79,4 +77,4 @@ const sign_in = () => {
   )
 }
 
-export default sign_in
+export default Sign_in

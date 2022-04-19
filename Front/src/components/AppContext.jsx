@@ -11,6 +11,7 @@ export const AppContextProvider = (props) => {
   const initSession = useCallback((jwt) => {
     if (!jwt) {
       setSession(null)
+      
       return
     }
 

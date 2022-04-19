@@ -2,7 +2,6 @@ import Link from "next/link"
 import { useContext, useEffect, useState } from "react"
 import AppContext from "../../src/components/AppContext"
 import api from "../../src/components/services/api"
-import { useRouter } from "next/router"
 import ModifyCommentForm from "../../src/components/ModifyCommentForm.jsx"
 
 const formatDate = (date) => {
