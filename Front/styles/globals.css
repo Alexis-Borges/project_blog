@@ -4,8 +4,12 @@
 
 @layer base {
   html {
-    font-family: "Pacifico", 
+    font-family: "Pacifico";
   }
+}
+
+:root {
+  font-family: "Pacifico";
 }
 
 /*body {
